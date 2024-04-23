@@ -1,101 +1,95 @@
-﻿@*
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <h1>Creacion de Usuarios</h1>
+    <h1>Creación de Usuarios</h1>
     <h2>Ingrese los datos solicitados</h2>
     <br />
     <form asp-action="CrearEquipos">
-    @*Inicio del Formulario*@
+        @*Inicio del Formulario*@
 
-        <div class="form-group row mb-4">
+        <div class="form-group row">
             @*Label y input de Nombre de Usuario*@
-            <div class="col-sm-2">
-                <label>Nombre</label>
-            </Div>
+            <label class="col-sm-2 col-form-label">Nombre</label>
             <div class="col-sm-4">
-                @Html.TextBox("nombre","",new {@class="form-control"})
-            </Div>
-            
+                @Html.TextBox("nombre", "", new { @class = "form-control" })
+            </div>
+
             @*Label y input de Apellido del Usuario*@
-            <div class="col-sm-2">
-                <label>Apellido</label>
-            </Div>
+            <label class="col-sm-2 col-form-label">Apellido</label>
             <div class="col-sm-4">
-                @Html.TextBox("apellido","",new {@class="form-control"})
-            </Div>
-                        @*Label y input de Email del Usuario*@
-            <div class="col-sm-2">
-                <label>Apellido</label>
-            </Div>
-            <div class="col-sm-4">
-                @Html.TextBox("email","",new {@class="form-control"})
-            </Div>
+                @Html.TextBox("apellido", "", new { @class = "form-control" })
+            </div>
 
-                        @*Label y input de Direccion del Usuario*@
-            <div class="col-sm-2">
-                <label>Apellido</label>
-            </Div>
+            @*Label y input de Email del Usuario*@
+            <label class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-4">
-                @Html.TextBox("direccion","",new {@class="form-control"})
-            </Div>
-            @*Label y input de Departamento de Usuario*@
-            <div class="col-sm-2 mb-3">
-                @Html.Label("lblDepartamento","Departamento")
-            </Div>
-            <div class="col-sm-4 mb-3">
-                @Html.DropDownList("id", ViewData["listadoDeDepartamentos"] as SelectList, "Seleccione una departamento", new {@class = "form-control"})
-            </Div>
-            @*Label y input de Puesto de Usuario*@
-            <div class="col-sm-2 mb-3">
-                @Html.Label("lblPuesto","Puesto")
-            </Div>
-            <div class="col-sm-4 mb-3">
-                @Html.DropDownList("id", ViewData["listadoDeDepartamentos"] as SelectList, "Seleccione un puesto", new {@class = "form-control"})
-            </Div>
+                @Html.TextBox("email", "", new { @class = "form-control" })
+            </div>
 
-            <div class="form-group row mb-4">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <input type="checkbox" id="estado" name="estado" value="true">
-                    <label class="form-check-label">
+            @*Label y input de Dirección del Usuario*@
+            <label class="col-sm-2 col-form-label">Dirección</label>
+            <div class="col-sm-4">
+                @Html.TextBox("direccion", "", new { @class = "form-control" })
+            </div>
+
+            @*Label y DropDownList de Departamento del Usuario*@
+            <label class="col-sm-2 col-form-label">Departamento</label>
+            <div class="col-sm-4">
+                @{
+                    var departamentos = new List<string>
+            {
+            "San Salvador",
+            "Santa Ana",
+            "San Miguel",
+            };
+                }
+                @Html.DropDownList("departamento", new SelectList(departamentos), "Seleccione un departamento", new { @class = "form-control" })
+            </div>
+
+            @*Label y DropDownList de Género del Usuario*@
+            <label class="col-sm-2 col-form-label">Género</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("genero", new SelectList(new List<string> { "Masculino", "Femenino", "Otro" }), "Seleccione un género", new { @class = "form-control" })
+            </div>
+
+            @*Label y input de Puesto del Usuario*@
+            <label class="col-sm-2 col-form-label">Puesto</label>
+            <div class="col-sm-4">
+                @Html.TextBox("puesto", "", new { @class = "form-control" })
+            </div>
+
+            @*Checkbox para Estado del Usuario*@
+            <div class="col-sm-offset-2 col-sm-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="estado" name="estado" value="true">
+                    <label class="form-check-label" for="estado">
                         Inactivo
                     </label>
                 </div>
-            </Div>
+            </div>
 
-            <div class="form-group row mb-4">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <input type="submit" class="btn btn-primary" value="Guardar"/>
-                </div>
-            </Div>
+            @*Botón de envío de formulario*@
+            <div class="col-sm-offset-2 col-sm-4">
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+            </div>
+        </div>
+    </form>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre Completo</th>
-                        <th>Email</th>
-                        <th>Direccion</th>
-                         <th>Departamento</th>
-                        <th>Genero</th>
-                        <th>Puesto</th>
-
-                    </tr>
-                </thead>
-                 <tbody>
-                    @foreach (var equipo in (IEnumerable<dynamic>)ViewData["listadoUsuarios"])
-                    {
-                        <tr>
-                            <td>@.id</td>
-                            <td>@clientes.descripcion</td>
-                            <td>@clientes.</td>
-                            <td> <a asp-action="Eliminar" asp-route-id="@equipo.id_equipo">Eliminar</a></td>
-                        </tr>
-                    }
-                </tbody>
-
-
-           </form>
-
+    @*Tabla para mostrar usuarios registrados - Necesita código backend para llenar datos*@
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Email</th>
+                <th>Dirección</th>
+                <th>Departamento</th>
+                <th>Género</th>
+                <th>Puesto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Inserte aquí el código para llenar la tabla con los datos de los usuarios *@
+        </tbody>
+    </table>
 }
